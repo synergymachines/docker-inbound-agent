@@ -35,7 +35,24 @@ RUN chmod +x /usr/local/bin/jenkins-agent &&\
 # USER ${user}
 
 RUN apt-get update -y
-RUN apt-get install -y sudo bc dos2unix git wget cron rsync vim python-pip docker 
+#RUN apt-get -y  install \
+#    apt-transport-https \
+#    ca-certificates \
+#    curl \
+#    gnupg-agent \
+#    software-properties-common
+#RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg |  apt-key add -
+#RUN add-apt-repository \
+#   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+#   $(lsb_release -cs) \
+#   stable"
 
+#RUN apt-get update  -y
+#RUN apt-get install -y docker-ce docker-ce-cli containerd.io 
+
+# RUN apt-get install -y sudo bc dos2unix git wget cron rsync vim python-pip docker 
+
+RUN curl -fsSL https://get.docker.com -o get-docker.sh
+RUN sh get-docker.sh
 
 ENTRYPOINT ["jenkins-agent"]
