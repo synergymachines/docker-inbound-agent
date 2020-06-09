@@ -55,4 +55,11 @@ RUN apt-get update -y
 RUN curl -fsSL https://get.docker.com -o get-docker.sh
 RUN sh get-docker.sh
 
-ENTRYPOINT ["jenkins-agent"]
+RUN mkdir /scripts
+COPY commands.sh /scripts/commands.sh
+RUN ["chmod", "+x", "/scripts/commands.sh"]
+
+#ENTRYPOINT ["/scripts/commands.sh"]
+#CMD /scripts/commands.sh
+
+ENTRYPOINT jenkins-agent && service docker start
